@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = os.environ['DEBUG']
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+]
 
 # Application definition
 
