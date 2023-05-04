@@ -139,3 +139,6 @@ dmypy.json
 
 # Fix js library
 !/static/js/lib
+
+
+*.DS_Store
