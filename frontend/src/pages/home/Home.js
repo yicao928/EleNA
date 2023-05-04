@@ -17,7 +17,7 @@ export default function Home() {
       <Topbar/>
       <div className="homeContainer">
         <RouteMap center={mapCenter} setCenter={setMapCenter} zoom={mapZoom}/>
-        <SearchForm />
+        <SearchForm center={mapCenter} setCenter={setMapCenter}/>
       </div>
     </>
     

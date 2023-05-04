@@ -1,10 +1,12 @@
 import React from 'react'
 import "./searchform.css"
 
-export default function SearchForm() {
+export default function SearchForm({center, setCenter}) {
   return (
     <div className='formContainer'>
-      SearchForm
+      Current mark location:
+      <span>{center.lat},{center.lng}</span>
     </div>
+    
   )
 }
