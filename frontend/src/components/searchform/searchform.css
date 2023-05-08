@@ -1,3 +1,36 @@
 .formContainer{
     flex:2
 }
+.title1{
+    font-size: 20px;
+}
+.title2{
+    font-size: 18px;
+}
+.radio{
+    font-size: 18px;
+}
+
+.button {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+    padding: 12px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+input[type=text] {
+    width: 45%;
+}
+input[type=text]:focus {
+  border: 3px solid #555;
+}
