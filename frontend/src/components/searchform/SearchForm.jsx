@@ -10,10 +10,15 @@ export default function SearchForm() {
     const [max_dis, setMax_dis] = useState("");
 
     const handleSubmit = (event) => {
-        //event.preventDefault();
-        // alert(`Name: ${formData.name}, Email: ${formData.email}, Message: ${formData.message}`
+        event.preventDefault();
+        // alert(`The name you entered was: ${name}`)
         // );
-    };
+    }
+    const handleSearch = (event) => {
+        event.preventDefault();
+        // alert(`The name you entered was: ${name}`)
+        // );
+    }
 
     const onValueChange = (changeEvent) => {
       //this.setState({
@@ -27,9 +32,17 @@ export default function SearchForm() {
                 <br/><br/>
                 <label className='title1'><h2>Plan my route:</h2></label>
                 <div className='route'>
-                    <input type="text" id="start" name="start" value={start} placeholder="Start from..." onChange={(e) => setStart(e.target.value)} />
+                    <form onSubmit={handleSearch}>
+                        <input type="text" id="start" name="start" value={start} placeholder="Start from..." onChange={(e) => setStart(e.target.value)} />
+                        &nbsp;
+                        <button className="s_button" type="submit">Search</button>
+                    </form>
                     <br/>
-                    <input type="text" id="end" name="end" value={end} placeholder="To..." onChange={(e) => setEnd(e.target.value)}/>
+                    <form onSubmit={handleSearch}>
+                        <input type="text" id="end" name="end" value={end} placeholder="To..." onChange={(e) => setEnd(e.target.value)}/>
+                        &nbsp;
+                        <button className="s_button" type="submit">Search</button>
+                    </form>
                 </div>
                 <br/><br/><br/>
                 <label className='title1'><h2>Route Options:</h2></label>
