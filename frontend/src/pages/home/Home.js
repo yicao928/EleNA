@@ -7,16 +7,20 @@ import "./home.css"
 
 export default function Home() {
   // This state is used to the center attribute of MapContainer component
-  const [mapCenter, setMapCenter] = useState({lat:49, lng:11});
+  const [mapCenter, setMapCenter] = useState({lat:42.3754, lng:-72.5193});
   // This state is used to the zoom attribute of MapContainer component
-  const [mapZoom, setMapZoom] = useState(4);
+  const [mapZoom, setMapZoom] = useState(20);
+
+  const [startPos, setStartPos] = useState({lat:42.3754, lng:-72.5193});
+  const [endPos, setEndPos] = useState({lat:42.3754, lng:-72.5193});
+  const [curPosSet, setCurPosSet] = useState(()=> setStartPos);
 
   return (
     
     <>
       <Topbar/>
       <div className="homeContainer">
-        <RouteMap center={mapCenter} setCenter={setMapCenter} zoom={mapZoom}/>
+        <RouteMap startPos={startPos} endPos={endPos} curPosSet={curPosSet} zoom={mapZoom}/>
         <SearchForm center={mapCenter} setCenter={setMapCenter}/>
       </div>
     </>
