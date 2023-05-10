@@ -21,7 +21,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-export default function RouteMap({startPos, endPos, curPosSet, zoom}) {
+export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints}) {
   const [center, setCenter] = useState({lat: (startPos.lat+endPos.lat)/2, lng: (startPos.lng+endPos.lng)/2})
   
   //The boundary of map
@@ -31,7 +31,7 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom}) {
   );
   
 
-  // If click event occurs on map, it will update the start or end position.
+  // If click event occurs on map, it will update the start or end position in the form as well.
   const ClickAndUpdate = () => {
     const map = useMapEvents({
       click(e){
@@ -72,6 +72,7 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom}) {
           <Popup>End point for select</Popup>
         </Marker>
         <ClickAndUpdate/>
+        {wayPoints===null? null : <RoutingMachine waypoints={wayPoints}/>}
       </MapContainer>
     </div>
   )
