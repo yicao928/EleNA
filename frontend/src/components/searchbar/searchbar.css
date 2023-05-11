@@ -1,0 +1,21 @@
+.searchbarContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+}
+
+.dropdown-row{
+    cursor: pointer;
+    text-align: start;
+    margin: 2px 0;
+}
+
+.search-inner{
+    display: flex;
+}

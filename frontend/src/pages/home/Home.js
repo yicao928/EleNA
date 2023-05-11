@@ -4,6 +4,7 @@ import SearchForm from "../../components/searchform/SearchForm";
 import Topbar from "../../components/topbar/Topbar";
 import React, { useState } from "react";
 import "./home.css"
+import SearchBar from "../../components/searchbar/SearchBar";
 
 export default function Home() {
   // This state is used to the center attribute of MapContainer component
@@ -25,6 +26,14 @@ export default function Home() {
         <SearchForm startPos={startPos} setStartPos={setStartPos} endPos={endPos} setEndPos={setEndPos} setCurPosSet={setCurPosSet} setWayPoints={setWayPoints}/>
       </div>
     </>
-    
+    /*
+    <>
+      <Topbar/>
+      <div className="homeContainer">
+        <RouteMap startPos={startPos} endPos={endPos} curPosSet={curPosSet} zoom={mapZoom} wayPoints={wayPoints}/>
+        <SearchBar id="start" position={startPos} setCurPosSet={setCurPosSet} posSetFunc={setStartPos}/>
+      </div>
+    </>
+    */
   )
 }
