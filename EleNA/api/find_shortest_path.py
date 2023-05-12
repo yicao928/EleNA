@@ -19,7 +19,9 @@ def api_find_shortest_path(request):
     path, distance = dijkstra(start_node, end_node, node_id_list)
     coordinate_path = node_id_to_latlon(path)
 
-    return JsonResponse({
+    response = JsonResponse({
         'path': coordinate_path,
         'distance': distance
     })
+    response['Access-Control-Allow-Origin'] = '*';
+    return response
