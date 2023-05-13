@@ -29,7 +29,16 @@ export default function SearchBar({id, position, setCurPosSet, posSetFunc}) {
         
         //alert("search: "+ keyword);
         // api for search location
-        setSearchResults(results)
+        fetch('http://127.0.0.1:8000/api/search_node_by_tag?search_value='+keyword+'&search_tag=name')
+        .then(response => response.json())
+        .then(data => {
+            setSearchResults(data['search_result'])
+            // console.log(searchResults.length)
+        })
+            .catch((err) => {
+                console.log(err.message);
+            })
+        // setSearchResults(results)
     }
     
     const changeHandler = (event) => {
