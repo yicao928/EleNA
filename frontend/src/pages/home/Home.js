@@ -2,7 +2,7 @@
 import RouteMap from "../../components/map/RouteMap";
 import SearchForm from "../../components/searchform/SearchForm";
 import Topbar from "../../components/topbar/Topbar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css"
 import SearchBar from "../../components/searchbar/SearchBar";
 
@@ -15,7 +15,9 @@ export default function Home() {
   const [startPos, setStartPos] = useState({lat:42.3754, lng:-72.5193});
   const [endPos, setEndPos] = useState({lat:42.3754, lng:-72.5193});
   const [curPosSet, setCurPosSet] = useState(()=> setStartPos);
-  const [wayPoints, setWayPoints] = useState(null);
+  const [wayPoints, setWayPoints] = useState([startPos, endPos]);
+
+  
 
   return (
     

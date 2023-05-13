@@ -3,14 +3,9 @@ import './routemap.css';
 import { MapContainer, TileLayer, useMapEvents, Marker, Popup, useMap} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L, { bounds } from 'leaflet';
-import RoutingMachine from '../routingmachine/RoutingMachine';
+import "leaflet-routing-machine";
+import Routing from '../routingmachine/RoutingMachine';
 
-
-const DummyRoute = [
-  {lat:42.3753, lng:-72.5193},
-  {lat:42.3756, lng:-72.5190},
-  {lat:42.3759, lng:-72.5194},
-]
 
 // the image is not loaded correctly, the folloing lines will fix this problem
 // ref: https://github.com/PaulLeCam/react-leaflet/issues/453#issuecomment-541142178https://
@@ -23,6 +18,7 @@ L.Icon.Default.mergeOptions({
 
 export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints}) {
   const [center, setCenter] = useState({lat: (startPos.lat+endPos.lat)/2, lng: (startPos.lng+endPos.lng)/2})
+  
   
   //The boundary of map
   const bound = L.latLngBounds(
@@ -42,14 +38,14 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints})
     return null;
   }
 
+  
+
   // Update the center
   useEffect(()=>{
     setCenter({lat: (startPos.lat+endPos.lat)/2, lng: (startPos.lng+endPos.lng)/2})
   }, [startPos, endPos])
 
 
-
-  
   // MapContainer props are immutable, so we need to add a children
   function ChangeView({ center, zoom, bounds }) {
     const map = useMap();
@@ -74,7 +70,7 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints})
           <Popup>End point for select</Popup>
         </Marker>
         <ClickAndUpdate/>
-        {wayPoints == null? null : <RoutingMachine waypoints={wayPoints}/>}
+        <Routing waypoints={wayPoints}/>
       </MapContainer>
     </div>
   )

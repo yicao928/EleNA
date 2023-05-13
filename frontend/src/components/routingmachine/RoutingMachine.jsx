@@ -1,30 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import L from "leaflet";
-import { createControlComponent } from "@react-leaflet/core";
 import "leaflet-routing-machine";
+import { useMap } from 'react-leaflet';
 
-const createRoutineMachineLayer = (props) => {
-    
-    const instance = L.Routing.control({
-        waypoints: props.waypoints,
-        plan: L.Routing.plan(props.waypoints, {
-          createMarker: function(i, wp, n) {
-            if (i == 0 || i == n - 1) {
-              return L.marker(wp.latLng, {
-                draggable: false // prevent users from changing waypoint position
-              });
-            } else {
-              return false;
-            }
+
+export default function Routing({waypoints}) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+
+    const routingControl = L.Routing.control({
+      waypoints: waypoints,
+      plan: L.Routing.plan(waypoints, {
+        createMarker: function(i, wp, n) {
+          /*
+          if (i == 0 || i == n - 1) {
+            return L.marker(wp.latLng, {
+              draggable: false // prevent users from changing waypoint position
+            });
+          } else {
+            return false;
           }
-        }),
-        addWaypoints: false // prevent users from adding new waypoints
-    });
-  
-    return instance;
-  };
+          */
+         return false;
+        }
+      }),
+      addWaypoints: false, // prevent users from adding new waypoints
+      show: false
+  }).addTo(map);
+    
+    return () => map.removeControl(routingControl);
+  }, [waypoints]);
 
-
-const RoutingMachine = createControlComponent(createRoutineMachineLayer);
-
-export default RoutingMachine;
+  return null;
+}
