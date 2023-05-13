@@ -6,10 +6,10 @@ import L, { bounds } from 'leaflet';
 import RoutingMachine from '../routingmachine/RoutingMachine';
 
 
-const waypoints = [
-  {lat:48.99, lng:11},
-  {lat:49, lng:11},
-  {lat:49.01, lng:11},
+const DummyRoute = [
+  {lat:42.3753, lng:-72.5193},
+  {lat:42.3756, lng:-72.5190},
+  {lat:42.3759, lng:-72.5194},
 ]
 
 // the image is not loaded correctly, the folloing lines will fix this problem
@@ -47,6 +47,8 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints})
     setCenter({lat: (startPos.lat+endPos.lat)/2, lng: (startPos.lng+endPos.lng)/2})
   }, [startPos, endPos])
 
+
+
   
   // MapContainer props are immutable, so we need to add a children
   function ChangeView({ center, zoom, bounds }) {
@@ -72,7 +74,7 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints})
           <Popup>End point for select</Popup>
         </Marker>
         <ClickAndUpdate/>
-        {wayPoints===null? null : <RoutingMachine waypoints={wayPoints}/>}
+        {wayPoints == null? null : <RoutingMachine waypoints={wayPoints}/>}
       </MapContainer>
     </div>
   )
