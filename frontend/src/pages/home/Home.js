@@ -15,7 +15,7 @@ export default function Home() {
   const [startPos, setStartPos] = useState({lat:42.3754, lng:-72.5193});
   const [endPos, setEndPos] = useState({lat:42.3754, lng:-72.5193});
   const [curPosSet, setCurPosSet] = useState(()=> setStartPos);
-  const [wayPoints, setWayPoints] = useState([startPos, endPos]);
+  const [wayPoints, setWayPoints] = useState([]);
 
   
 

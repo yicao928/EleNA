@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
-import L from "leaflet";
+import { useEffect, useState } from 'react'
+import L, { marker } from "leaflet";
 import "leaflet-routing-machine";
-import { useMap } from 'react-leaflet';
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
+import { Marker, useMap } from 'react-leaflet';
+import { routingPin } from '../CustomIcon';
 
-
-export default function Routing({waypoints}) {
+// Use routing machine to draw the routing
+function RoutingMachine({waypoints}) {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
-
-    const routingControl = L.Routing.control({
+    if (!waypoints) return;
+    const routingControl = new L.Routing.control({
       waypoints: waypoints,
       plan: L.Routing.plan(waypoints, {
         createMarker: function(i, wp, n) {
@@ -27,7 +29,8 @@ export default function Routing({waypoints}) {
         }
       }),
       addWaypoints: false, // prevent users from adding new waypoints
-      show: false
+      show: false,
+      
   }).addTo(map);
     
     return () => map.removeControl(routingControl);
@@ -35,3 +38,30 @@ export default function Routing({waypoints}) {
 
   return null;
 }
+
+// use marker to display the routing
+function RoutingWithMarker({waypoints}){
+  /*
+  const map = useMap();
+  const [markers, setMarkers] = useState([]);
+  useEffect(()=>{
+    if(!map) return;
+    
+    setMarkers(waypoints.map((element)=>{
+      const mark =  new L.Marker(element, {draggable:false}).addTo(map);
+      return mark;
+    }))
+
+    return () => markers.forEach((element)=>{
+      map.removeLayer(element)
+    });
+  }, [waypoints])
+  */
+  if(waypoints.length == 0) return null;
+
+  return waypoints.map((elemment)=>(
+        <Marker position={elemment} icon={routingPin}/>
+      ))
+}
+
+export {RoutingMachine, RoutingWithMarker}

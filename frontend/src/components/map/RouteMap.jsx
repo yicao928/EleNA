@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './routemap.css';
 import { MapContainer, TileLayer, useMapEvents, Marker, Popup, useMap} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L, { bounds } from 'leaflet';
+import L from 'leaflet';
 import "leaflet-routing-machine";
-import Routing from '../routingmachine/RoutingMachine';
+import {RoutingMachine, RoutingWithMarker} from '../routingmachine/RoutingMachine';
 
 
 // the image is not loaded correctly, the folloing lines will fix this problem
@@ -70,7 +70,7 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints})
           <Popup>End point for select</Popup>
         </Marker>
         <ClickAndUpdate/>
-        <Routing waypoints={wayPoints}/>
+        <RoutingWithMarker waypoints={wayPoints}/>
       </MapContainer>
     </div>
   )
