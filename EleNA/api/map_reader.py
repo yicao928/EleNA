@@ -244,3 +244,39 @@ def calculate_heuristic(node: int, goal: int, elevation, x) -> float:
     # The 0.01 factor is just an example; adjust as necessary
     heuristic = x * 20 * elevation + dist
     return heuristic
+
+
+def a_star(start: int, end: int, node_id_list: list, shortest_path_length: float, x):
+    # Use a priority queue (heap) where each item is (cost + heuristic, path)
+    # Start with the start node and cost 0
+    queue = [(0.0, ([start], 0.0, 0.0))]
+    visited = set()
+
+    while queue:
+        # Get the path with smallest cost + heuristic from the queue
+        cost, (path, length, elevation) = heapq.heappop(queue)
+        current_node = path[-1]
+
+        # If this node is the end node, we've found a path
+        if current_node == end:
+            return path, length, elevation
+        if current_node in visited:
+            continue
+        visited.add(current_node)
+
+        # Iterate over all neighbors of the current node
+        for neighbor in whole_graph[str(current_node)]:
+            if int(neighbor) not in node_id_list or neighbor in visited or neighbor in path:
+                continue
+
+            if length <= 4 * shortest_path_length:
+                # Calculate the heuristic
+                new_length = whole_graph[str(current_node)][str(neighbor)]
+                new_elevation = get_elevation(current_node, int(neighbor))
+                new_path = [i for i in path]
+                new_path.append(int(neighbor))
+                heuristic = calculate_heuristic(int(neighbor), end, elevation + new_elevation, x)
+                heapq.heappush(queue, (heuristic, (new_path, length + new_length, elevation + new_elevation)))
+
+    # If there's no path that satisfies the constraints, return None
+    return None
