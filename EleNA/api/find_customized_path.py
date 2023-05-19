@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from .map_reader import get_nearest_node, get_sub_area, dijkstra_edited, dijkstra, node_id_to_latlon
+from .map_reader import get_nearest_node, get_sub_area, a_star, dijkstra, node_id_to_latlon
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -25,7 +25,7 @@ def api_find_customized_path(request):
         x = 1
 
     node_id_list = get_sub_area(start_lat, start_lon, end_lat, end_lon, length_limit / 100)
-    path, elevation, distance = dijkstra_edited(start_node, end_node, node_id_list, distance * (length_limit / 100), x)
+    path, distance, elevation = a_star(start_node, end_node, node_id_list, distance,x)
     coordinate_path = node_id_to_latlon(path)
 
     response = JsonResponse({

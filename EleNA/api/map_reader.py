@@ -5,6 +5,7 @@ import sqlite3
 import heapq
 import numpy as np
 import json
+from geopy.distance import geodesic
 
 # load map data
 map_file_path = 'data/amherst_and_near_area.osm.pbf'
@@ -84,6 +85,7 @@ def dijkstra(start: int, end: int, node_id_list: dict):
         path.append(previous[end])
         end = previous[end]
     path.reverse()
+    print(shortest_distance)
 
     return path, shortest_distance
 
@@ -227,3 +229,18 @@ def node_id_to_latlon(node_id_list: list) -> list:
         lon = nodes[nodes.id == node_id]['lon'].values[0]
         res.append([lat, lon])
     return res
+
+
+def calculate_heuristic(node: int, goal: int, elevation, x) -> float:
+    # Get the latitude and longitude for the node and the goal
+    node_lat, node_lon = nodes[nodes.id == node][['lat', 'lon']].values[0]
+    goal_lat, goal_lon = nodes[nodes.id == goal][['lat', 'lon']].values[0]
+
+    # Estimate the spatial distance (Euclidean)
+    dist = geodesic((node_lat, node_lon), (goal_lat, goal_lon)).m
+    print((elevation, dist))
+
+    # Balance the elevation and distance components of the heuristic
+    # The 0.01 factor is just an example; adjust as necessary
+    heuristic = x * 20 * elevation + dist
+    return heuristic
