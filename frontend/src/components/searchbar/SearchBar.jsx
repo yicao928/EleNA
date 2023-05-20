@@ -61,8 +61,11 @@ export default function SearchBar({id, position, setCurPosSet, posSetFunc}) {
 
     return (
         <div className='searchbarContainer'>
+            <div className="id">{id}:</div>
             <div className="search-inner">
+                
                 <input 
+                    className='inputBar'
                     type="text" 
                     id={id}
                     name={id}

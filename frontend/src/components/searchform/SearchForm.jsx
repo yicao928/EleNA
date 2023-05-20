@@ -64,30 +64,43 @@ export default function SearchForm({startPos, setStartPos, endPos, setEndPos, se
     return (
         <div className='formContainer'>
             <form onSubmit={handleSubmit}>
-                <br/><br/>
-                <label className='title1'><h2>Plan my route:</h2></label>
-                <div className='route'>
-                    <SearchBar id={start} position={startPos} setCurPosSet={setCurPosSet} posSetFunc={setStartPos}/>
-                    <br/>
-                    <SearchBar id={end} position={endPos} setCurPosSet={setCurPosSet} posSetFunc={setEndPos}/>
+                <div className="positionContainer">
+                    <label className='title1'><h2>Plan your route</h2></label>
+                    <div className='route'>
+                        <div className="searchbar">
+                            <SearchBar id={"Start"} position={startPos} setCurPosSet={setCurPosSet} posSetFunc={setStartPos}/>
+                        </div>
+                        <div className="searchbar">
+                            <SearchBar id={"End"} position={endPos} setCurPosSet={setCurPosSet} posSetFunc={setEndPos}/>
+                        </div>
+                    </div>
                 </div>
-                <br/><br/><br/>
-                <label className='title1'><h2>Route Options:</h2></label>
-                <label className='title2'><h3>•Elevation gain</h3></label>
-                <br/>
-                <div className="radio">
-                    <input type="radio" name="radio" value="max" onChange={onValueChange}/> Maximum
+                
+                <div className="optionContainer">
+                    <label className='title1'><h2>Route Options:</h2></label>
+                    <div className="option">
+                        <label className='title2'><h3>•Elevation gain</h3></label>
+                        <div className="optionVariable">
+                            <div className="radio">
+                                <input type="radio" name="radio" value="max" onChange={onValueChange}/> Maximum
+                            </div>
+                            <div className="radio">
+                                <label>
+                                    <input type="radio" name="radio" value="min" onChange={onValueChange}/> Minimum
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="option">
+                        <label className='title2'><h3>•Route maximum distance:</h3></label>
+                        <div className="optionVariable">
+                            <input type="text" id="max_dis" name="max_dis" value={max_dis} placeholder="150%"
+                                onChange={(e) => setMax_dis(e.target.value)}/>
+                        </div>
+                    </div>
                 </div>
-                <div className="radio">
-                    <label>
-                        <input type="radio" name="radio" value="min" onChange={onValueChange}/> Minimum
-                    </label>
-                </div>
-                <br/><br/>
-                <label className='title2'><h3>•Route maximum distance:</h3></label>
-                <input type="text" id="max_dis" name="max_dis" value={max_dis} placeholder="150%"
-                       onChange={(e) => setMax_dis(e.target.value)}/>
-                <br/><br/><br/><br/>
+                
                 <button className="button" type="submit">Submit</button>
             </form>
         </div>

@@ -2,8 +2,17 @@
     display: flex;
     flex-direction: column;
 }
+.id{
+    font-weight: 400;
+    margin-right: 5px;
+}
+
+.inputBar{
+    border-radius: 5px;
+}
 
 .dropdown{
+    width: 70%;
     background-color: white;
     display: flex;
     flex-direction: column;

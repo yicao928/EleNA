@@ -1,12 +1,46 @@
 .formContainer{
-    flex:2
+    flex:2;
+    margin-top: 25px;
+
 }
+
+.positionContainer{
+    margin-bottom: 25px;
+}
+
 .title1{
     font-size: 20px;
+    margin-bottom: 10px;
 }
+.route{
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.searchbar{
+    margin-bottom: 10px;
+}
+
 .title2{
     font-size: 18px;
+    
 }
+
+.option{
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.optionVariable{
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
 .radio{
     font-size: 18px;
 }
