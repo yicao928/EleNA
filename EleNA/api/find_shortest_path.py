@@ -23,5 +23,5 @@ def api_find_shortest_path(request):
         'path': coordinate_path,
         'distance': distance
     })
-    response['Access-Control-Allow-Origin'] = '*';
+    response['Access-Control-Allow-Origin'] = '*'
     return response

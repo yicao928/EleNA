@@ -33,5 +33,5 @@ def api_find_customized_path(request):
         'elevation': elevation,
         'distance': distance
     })
-    response['Access-Control-Allow-Origin'] = '*';
+    response['Access-Control-Allow-Origin'] = '*'
     return response
