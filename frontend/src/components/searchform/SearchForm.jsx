@@ -1,5 +1,5 @@
 import "./searchform.css"
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SearchBar from '../searchbar/SearchBar.jsx'
 
 // For all position variable, they are in type of latLng, which is in form of {lat:float, lng:float}
@@ -19,31 +19,29 @@ export default function SearchForm({startPos, setStartPos, endPos, setEndPos, se
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch('http://127.0.0.1:8000/api/find_customized_path?start_lat=' + startPos.lat + '&start_lon=' + startPos.lng + '&end_lat=' + endPos.lat + '&end_lon=' + endPos.lng + '&min_or_max='+ max_min +'max&length_limit='+ max_dis)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                // setSearchPath(data["path"])
-                //!! replace below
-                setSearchPath(result["path"])
-                console.log(searchPath)
-                searchPath.forEach(element => {
-                    waypoints.push({lat:element[0], lng:element[1]})
-                })
-            })
-            .then(setWayPoints(waypoints))
-        .catch((err) => {
-            console.log(err.message);
-        })
-
-
-        // setSearchPath(result["path"])
-        // //console.log(searchPath)
-        // searchPath.forEach(element => {
-        //     waypoints.push({lat:element[0], lng:element[1]})
+        // fetch('http://127.0.0.1:8000/api/find_customized_path?start_lat=' + startPos.lat + '&start_lon=' + startPos.lng + '&end_lat=' + endPos.lat + '&end_lon=' + endPos.lng + '&min_or_max='+ max_min +'max&length_limit='+ max_dis)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data)
+        //         // setSearchPath(data["path"])
+        //         //!! replace below
+        //         setSearchPath(result["path"])
+        //         console.log(searchPath)
+        //         searchPath.forEach(element => {
+        //             waypoints.push({lat:element[0], lng:element[1]})
+        //         })
+        //     })
+        //     .then(setWayPoints(waypoints))
+        // .catch((err) => {
+        //     console.log(err.message);
         // })
-        // //console.log(waypoints)
-        // setWayPoints(waypoints)
+
+        let waypoints = []
+        setSearchPath(result["path"])
+        //console.log(searchPath)
+        
+        //console.log(waypoints)
+        //setWayPoints(waypoints)
     }
 
     const onChangeValue = (event) => {
@@ -61,6 +59,12 @@ export default function SearchForm({startPos, setStartPos, endPos, setEndPos, se
             setCurPosSet(() => setEndPos);
         }
     }
+
+    useEffect(()=>{
+        setWayPoints(searchPath.map(element => (
+            {lat:element[0], lng:element[1]}
+        )))
+    },[searchPath])
 
     return (
         <div className='formContainer'>

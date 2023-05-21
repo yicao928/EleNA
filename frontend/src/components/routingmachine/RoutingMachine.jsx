@@ -57,6 +57,7 @@ function RoutingWithMarker({waypoints}){
     });
   }, [waypoints])
   */
+  console.log(waypoints)
   if(waypoints.length == 0) return null;
 
   return waypoints.map((elemment)=>(
