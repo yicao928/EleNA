@@ -19,29 +19,31 @@ export default function SearchForm({startPos, setStartPos, endPos, setEndPos, se
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // fetch('http://127.0.0.1:8000/api/find_shortest_path?start)lat=' + startPos.lat + '&start_lon=' + startPos.lng + '&end_lat=' + endPos.lat + '&end_lon=' + endPos.lng)
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data)
-        //         // setSearchPath(data["path"])
-        //         //!! replace below
-        //         setSearchPath(result["path"])
-        //         console.log(searchPath)
-        //         searchPath.forEach(element => {
-        //             waypoints.push({lat:element[0], lng:element[1]})
-        //         })
-        //     })
-        //     .then(setWayPoints(waypoints))
-        // .catch((err) => {
-        //     console.log(err.message);
-        // })
-        setSearchPath(result["path"])
-        //console.log(searchPath)
-        searchPath.forEach(element => {
-            waypoints.push({lat:element[0], lng:element[1]})
+        fetch('http://127.0.0.1:8000/api/find_shortest_path?startlat=' + startPos.lat + '&start_lon=' + startPos.lng + '&end_lat=' + endPos.lat + '&end_lon=' + endPos.lng)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                // setSearchPath(data["path"])
+                //!! replace below
+                setSearchPath(result["path"])
+                console.log(searchPath)
+                searchPath.forEach(element => {
+                    waypoints.push({lat:element[0], lng:element[1]})
+                })
+            })
+            .then(setWayPoints(waypoints))
+        .catch((err) => {
+            console.log(err.message);
         })
-        //console.log(waypoints)
-        setWayPoints(waypoints)
+
+
+        // setSearchPath(result["path"])
+        // //console.log(searchPath)
+        // searchPath.forEach(element => {
+        //     waypoints.push({lat:element[0], lng:element[1]})
+        // })
+        // //console.log(waypoints)
+        // setWayPoints(waypoints)
     }
 
     const onValueChange = (changeEvent) => {
