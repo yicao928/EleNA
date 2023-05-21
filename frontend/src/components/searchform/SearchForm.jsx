@@ -26,10 +26,10 @@ export default function SearchForm({startPos, setStartPos, endPos, setEndPos, se
                 // setSearchPath(data["path"])
                 //!! replace below
                 setSearchPath(result["path"])
-                console.log(searchPath)
-                searchPath.forEach(element => {
-                    waypoints.push({lat:element[0], lng:element[1]})
-                })
+                // console.log(searchPath)
+                // searchPath.forEach(element => {
+                //     waypoints.push({lat:element[0], lng:element[1]})
+                // })
             })
             //.then(setWayPoints(waypoints))
         .catch((err) => {
