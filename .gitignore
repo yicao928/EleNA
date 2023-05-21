@@ -145,3 +145,4 @@ dmypy.json
 
 /frontend/node_modules/
 *.icloud
+/.venv
