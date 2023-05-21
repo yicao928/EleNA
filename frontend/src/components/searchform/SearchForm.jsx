@@ -19,17 +19,17 @@ export default function SearchForm({startPos, setStartPos, endPos, setEndPos, se
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch('http://127.0.0.1:8000/api/find_customized_path?start_lat=' + startPos.lat + '&start_lon=' + startPos.lng + '&end_lat=' + endPos.lat + '&end_lon=' + endPos.lng + '&min_or_max='+ max_min +'max&length_limit='+ max_dis)
+        fetch('http://127.0.0.1:8000/api/find_customized_path?start_lat=' + startPos.lat + '&start_lon=' + startPos.lng + '&end_lat=' + endPos.lat + '&end_lon=' + endPos.lng + '&min_or_max=' + max_min + '&length_limit=' + max_dis)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
                 // setSearchPath(data["path"])
                 //!! replace below
                 setSearchPath(result["path"])
-                // console.log(searchPath)
-                // searchPath.forEach(element => {
-                //     waypoints.push({lat:element[0], lng:element[1]})
-                // })
+                console.log(searchPath)
+                searchPath.forEach(element => {
+                    waypoints.push({lat:element[0], lng:element[1]})
+                })
             })
             //.then(setWayPoints(waypoints))
         .catch((err) => {
