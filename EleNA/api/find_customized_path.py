@@ -16,7 +16,7 @@ def api_find_customized_path(request):
     start_node = get_nearest_node(start_lat, start_lon)
     end_node = get_nearest_node(end_lat, end_lon)
 
-    node_id_list = get_sub_area(start_lat, start_lon, end_lat, end_lon, 1.00)
+    node_id_list = get_sub_area(start_lat, start_lon, end_lat, end_lon, length_limit / 100)
     path, distance = dijkstra(start_node, end_node, node_id_list)
 
     if min_or_max == 'max':
@@ -25,7 +25,7 @@ def api_find_customized_path(request):
         x = 1
 
     node_id_list = get_sub_area(start_lat, start_lon, end_lat, end_lon, length_limit / 100)
-    path, distance, elevation = a_star(start_node, end_node, node_id_list, distance,x)
+    path, distance, elevation = a_star(start_node, end_node, node_id_list, distance, x, length_limit / 100)
     coordinate_path = node_id_to_latlon(path)
 
     response = JsonResponse({

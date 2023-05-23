@@ -246,7 +246,7 @@ def calculate_heuristic(node: int, goal: int, elevation, x) -> float:
     return heuristic
 
 
-def a_star(start: int, end: int, node_id_list: list, shortest_path_length: float, x):
+def a_star(start: int, end: int, node_id_list: list, shortest_path_length: float, x: int, coefficient: float):
     # Use a priority queue (heap) where each item is (cost + heuristic, path)
     # Start with the start node and cost 0
     queue = [(0.0, ([start], 0.0, 0.0))]
@@ -269,7 +269,7 @@ def a_star(start: int, end: int, node_id_list: list, shortest_path_length: float
             if int(neighbor) not in node_id_list or neighbor in visited or neighbor in path:
                 continue
 
-            if length <= 4 * shortest_path_length:
+            if length <= coefficient * shortest_path_length:
                 # Calculate the heuristic
                 new_length = whole_graph[str(current_node)][str(neighbor)]
                 new_elevation = get_elevation(current_node, int(neighbor))
