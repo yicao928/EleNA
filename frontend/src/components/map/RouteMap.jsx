@@ -42,16 +42,16 @@ export default function RouteMap({startPos, endPos, curPosSet, zoom, wayPoints})
 
   // Update the center
   useEffect(()=>{
-    setCenter({lat: (startPos.lat+endPos.lat)/2, lng: (startPos.lng+endPos.lng)/2})
+    // setCenter({lat: (startPos.lat+endPos.lat)/2, lng: (startPos.lng+endPos.lng)/2})
   }, [startPos, endPos])
 
 
   // MapContainer props are immutable, so we need to add a children
   function ChangeView({ center, zoom, bounds }) {
-    const map = useMap();
-    map.setView(center, zoom);
-    map.setMaxBounds(bounds);
-    return null;
+    // const map = useMap();
+    // map.setView(center, zoom);
+    // map.setMaxBounds(bounds);
+    // return null;
   }
 
   return (
